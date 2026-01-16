@@ -1,0 +1,40 @@
+Table clients {
+  passport int [primary key]
+  fio varchar
+  phone varchar
+}
+
+Table contracts {
+  contract_id int [primary key]
+  passport int
+  voucher_id int
+  data date
+}
+
+Table vouchers {
+  voucher_id int [primary key]
+  name varchar
+  country varchar
+  city varchar
+  number_days int
+  price numeric
+  number_people int
+}
+
+Table places {
+  place_id int [primary key]
+  name varchar
+  number_stars int
+  city varchar
+}
+
+Table voucher_place {
+  vp_id int [primary key]
+  voucher_id int
+  place_id int
+}
+
+Ref: contracts.passport > clients.passport
+Ref: vouchers.voucher_id < contracts.voucher_id
+Ref: voucher_place.voucher_id > vouchers.voucher_id
+Ref: voucher_place.place_id > places.place_id
